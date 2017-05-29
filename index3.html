@@ -1,0 +1,388 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>五子棋</title>
+        <style>
+            #container{
+                width:531px;
+                height:645px;
+                margin:0 auto;
+                border:1px solid black;
+                background:url(qiban.jpg) no-repeat;
+                padding-top: 0px;
+                padding-left: 5px;
+            }
+            td{
+                width:40px;
+                height:33px;
+            }
+        table{
+            border-collapse: collapse;
+            width:525px;
+            height:465px;
+            }
+        </style>
+        <script>
+            function status1(){
+                document.getElementById('qizi').src="black.png";
+            }
+            function status2(){
+                document.getElementById('qizi').src="white.png";
+            }
+            function closeFunction(){
+                if(confirm("是否退出游戏")){
+                    window.close();
+                }
+                else{
+                    history.back();
+                }
+            }
+            var cnt = (function() {
+                var curr ='black';
+                return function() {
+                    var tmp = curr;
+                    if (curr == 'black') {
+                        curr = 'white';
+                    }
+                     else {
+                        curr = 'black';
+                    }
+                return tmp;
+                }
+            })();
+            var tds = document.getElementsByTagName('td');
+            var iswin = false;
+               var xia = function(){
+                var color = cnt ();
+                if (iswin) {
+                    alert('游戏结束');
+                    return;
+                }
+                if(this.style.background.indexOf('.png')>=0){
+                    alert('不可重复放置');
+                    return;
+                }
+                this.style.background = 'url('+color+'.png)';
+                judge.call(this,color);
+            }
+            var judge = function(color){
+                var curr = {
+                    x: this.cellIndex,y:this.parentElement.rowIndex,color:color
+                };
+                var line = ['','','',''];
+                for(var i=0,tmp={};i<225;i++){
+                    tmp = {
+                        x:tds[i].cellIndex,
+                        y:tds[i].parentElement.rowIndex,
+                        color:'0'
+                    };
+                    if(tds[i].style.background.indexOf('black') >=0){
+                        tmp.color = 'b';
+                    }
+                    else if(tds[i].style.background.indexOf('white') >=0){
+                        tmp.color = 'w';
+                    }
+                    if(curr.y == tmp.y){
+                        line[0] += tmp.color;
+                    }
+                    if(curr.x == tmp.x){
+                        line[1] += tmp.color;
+                    }
+                    if((curr.x + curr.y) == (tmp.x + tmp.y)){
+                        line[2] += tmp.color;
+                    }
+                    if((curr.x - curr.x) == (tmp.y - tmp.y)){
+                        line[3] += tmp.color;
+                    }
+                }
+                color = color == 'black' ? 'bbbbb' : 'wwwww';
+                for(var i = 0; i < 4; i++){
+                    if (line[i].indexOf(color) >= 0){
+                        alert(color + '胜了（b是黑，w是白）');
+                        iswin = true;
+                        break;
+                    }
+                }
+            }
+                window.onload = function(){
+               var srcElements = document.querySelectorAll('#board td')
+                for (var e of srcElements) {
+                    e.onclick = function(ev) {
+                      xia.call(ev.srcElement);
+                    }
+                }               
+            }
+        </script>
+    </head>
+    <body>
+        <div id="container">
+         <table id="board">
+             <tr>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+             </tr>
+             <tr>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+             </tr>
+             <tr>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+             </tr>
+             <tr>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+             </tr>
+             <tr>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+             </tr>
+             <tr>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+             </tr>
+             <tr>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+             </tr>
+             <tr>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+             </tr>
+             <tr>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+             </tr>
+             <tr>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+             </tr>
+             <tr>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+             </tr>
+             <tr>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+             </tr>
+             <tr>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+             </tr>
+             <tr>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+             </tr>
+             <tr>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+             </tr>             
+         </table>
+         <br/>
+        <div>
+            <p>&nbsp;先手棋:
+            <img id="qizi" src="">
+            <input type="button" value="黑棋先" onclick="status1()">
+            <input type="button" value="白棋先" onclick="status2()">
+            <input type="button" value="再来一局" onclick="window.location.href=window.location">
+            <input type="button" value="退出游戏" onclick="closeFunction()">
+        </div>
+        </div>
+    </body>
+</html>
